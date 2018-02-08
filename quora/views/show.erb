@@ -1,0 +1,46 @@
+<h3> Question title </h3>
+<p><%= @question.title %></p>
+
+
+<h3> Question description </h3>
+<p><%= @question.description %></p>
+
+
+<table style="width:45%"  >
+  <tr>
+    <th align="left" >created at:</th>
+    <th align="left" >updated at :</th> 
+  </tr>
+  <tr>
+    <td><%= @question.created_at %></td>
+    <td><%= @question.updated_at %></td>
+  </tr>
+</table>
+<br/>
+
+
+<!-- #EDIT -->
+
+<form  method="GET" action="/questions/<%= @question.id %>/edit">
+  <input type="submit" value="EDIT">
+</form>
+
+<!-- #DELETE -->
+<form  method="POST" action="/questions/<%= @question.id %>/delete">
+  <input type="hidden" name ="_method" value= "DELETE">
+  <input type="submit" value="DELETE">
+</form>
+
+<!-- #Add another question -->
+
+<form  method="GET" action="/questions/new">
+  <input type="submit" value="New Question">
+</form> 
+
+<!-- View all questions -->
+<form  method="GET" action="/questions">
+<input type="submit" value="View all questions">
+</form> 
+
+
+

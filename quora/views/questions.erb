@@ -1,0 +1,18 @@
+<h3>All Questions</h3>
+
+<ul>
+<% @questions.each do |question| %>
+	<li>
+    <p><strong> Title: </strong><%= question.title %></p>
+		<%= question.description %>
+	</li>
+  <br/>
+
+
+    <form  method="GET" action="/questions/<%= question.id %>">
+      <input type="submit" value="View">
+    </form>
+
+  <br/>
+<% end %>
+</ul>
