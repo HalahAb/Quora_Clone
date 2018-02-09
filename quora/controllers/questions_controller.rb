@@ -6,14 +6,14 @@ end
 
 #get a form to create a question
 get '/questions/new' do
-  erb :"new"
+  erb :"questions/new"
 end
 
 #get a question
 get '/questions/:id' do
 
   @question = Question.find(params[:id])
-  erb :"show"
+  erb :"questions/show"
 
 end
 
@@ -35,7 +35,7 @@ end
 get '/questions' do
 	@questions = Question.all
   # Question.destroy_all
-	erb :"questions"
+	erb :"questions/questions"
 end
 
 
@@ -44,7 +44,7 @@ end
 get "/questions/:id/edit" do 
   @id = params[:id]   
   @question = Question.find(params[:id])
-  erb :"edit"
+  erb :"questions/edit"
 end
 
 
@@ -68,19 +68,19 @@ get "/questions/:id/delete" do
   @id = params[:id]   
   @question = Question.find(params[:id])
 
-  erb :"delete"
+  erb :"questions/delete"
 end
 
 
 
 
 delete "/questions/:id/delete" do 
-  @id = params[:id]  # => 4 5 6 
+  @id = params[:id]
   @question = Question.find(params[:id])
 
       if @question
       @question.destroy
-       erb :"delete"
+       erb :"questions/delete"
     else
     "Sorry, there was an error that question does not exist!"
   end
