@@ -35,6 +35,7 @@ end
 get '/questions' do
 	@questions = Question.all
   # Question.destroy_all
+  #Answer.destroy_all
 	erb :"questions/questions"
 end
 
@@ -77,9 +78,11 @@ end
 delete "/questions/:id/delete" do 
   @id = params[:id]
   @question = Question.find(params[:id])
+  @answers = Answer.where("question_id = ?", params[:id])
 
       if @question
       @question.destroy
+      @answers.destroy
        erb :"questions/delete"
     else
     "Sorry, there was an error that question does not exist!"

@@ -18,29 +18,49 @@
 </table>
 <br/>
 
+<table>
+  <tr>
 
-<!-- #EDIT -->
+    <td>
+    <!-- #EDIT -->
+      <form  method="GET" action="/questions/<%= @question.id %>/edit">
+        <input type="submit" value="EDIT">
+      </form>
+    </td>
 
-<form  method="GET" action="/questions/<%= @question.id %>/edit">
-  <input type="submit" value="EDIT">
-</form>
-
-<!-- #DELETE -->
-<form  method="POST" action="/questions/<%= @question.id %>/delete">
-  <input type="hidden" name ="_method" value= "DELETE">
-  <input type="submit" value="DELETE">
-</form>
-
-<!-- #Add another question -->
-
-<form  method="GET" action="/questions/new">
-  <input type="submit" value="New Question">
-</form> 
-
-<!-- View all questions -->
-<form  method="GET" action="/questions">
-<input type="submit" value="View all questions">
-</form> 
+    <td>
+      <!-- #DELETE -->
+      <form  method="POST" action="/questions/<%= @question.id %>/delete">
+        <input type="hidden" name ="_method" value= "DELETE">
+        <input type="submit" value="DELETE">
+      </form>
+    </td>
 
 
+    <td>
+      <!-- #Add another question -->
+
+      <form  method="GET" action="/questions/new">
+        <input type="submit" value="New Question">
+      </form> 
+    </td>
+
+     <td>
+    <!-- View all questions -->
+    <form  method="GET" action="/questions">
+    <input type="submit" value="View all questions">
+    </form> 
+    </td>
+
+    <td>
+      
+    <!-- submit an answer -->
+    <form  method="GET" action="/questions/<%= @question.id %>/answer">
+    <input type="submit" value="Answer">
+    </form> 
+    </td>
+
+
+</tr>
+</table>
 

@@ -1,0 +1,98 @@
+
+
+<form  method="POST" action="/questions/<%=@id%>/answers">
+
+  <input type="hidden" name ="_method" value "PUT">
+
+<h2> Question to be answered </h2>
+<table >
+  <tr>
+    <th align="left" >Title</th>
+  </tr>
+  <tr>
+    <td><%= @question.title %></td>
+  </tr>
+
+   <tr>
+    <th align="left" >Description</th>
+  </tr>
+  <tr>
+    <td><%= @question.description %></td>
+  </tr>
+</table>
+<br>
+<table style="width:45%"  >
+  <tr>
+    <th align="left" >created at:</th>
+    <th align="left" >updated at :</th> 
+  </tr>
+  <tr>
+    <td><%= @question.created_at %></td>
+    <td><%= @question.updated_at %></td>
+  </tr>
+</table>
+
+
+
+<table>
+  <tr>
+      <!-- #Add another question -->
+    <td>
+      <form  method="GET" action="/questions/new">
+        <input type="submit" value="New Question">
+      </form> 
+    </td>
+
+    <!-- View all questions -->
+    <td>
+      <br/>
+      <form  method="GET" action="/questions">
+      <input type="submit" value="View all questions">
+      </form> 
+      </td>
+    <td>
+
+</tr>
+</table>
+
+
+
+
+<h3>Answers</h3>
+
+<ul>
+<% @answers.each do |answer| %>
+  <li>
+    <p><strong> Answer: </strong><%= answer.description %></p>
+  </li>
+
+
+   <!-- #DELETE -->
+      <form  method="POST" action="/questions/<%= @question.id %>/answers/<%= answer.id %>/delete">
+        <input type="hidden" name ="_method" value= "DELETE">
+        <input type="submit" value="DELETE">
+      </form>
+
+<% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<h2> New Answer</h2>
+
+   Answer:<br>
+  <textarea method= "" type="text" name="description"></textarea><br><br>
+
+  <input type="submit" value="Submit">
+
+</form>
+
+
