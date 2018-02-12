@@ -85,7 +85,7 @@ post "/questions/:id" do
     end
 end
 
-
+# This isn't doing anything #
 get "/questions/:id/delete" do 
  
   @question = Question.find_by(id: params[:id], user_id: cookies[:user_id])
@@ -105,12 +105,14 @@ end
 delete "/questions/:id/delete" do 
   @question = Question.find(params[:id])
   @answers = Answer.where("question_id = ?", params[:id])
+  
 
   if @question
-    if @question.id == cookies[:user_id]
+    if (@question.user_id == cookies[:user_id].to_i)
       @question.destroy
       @answers.destroy_all
        erb :"questions/delete"
+       # redirect '/questions/'+@question.id.to_s+'/delete'
     else 
       "Sorry, you must be logged in to delete this question!"
     end 

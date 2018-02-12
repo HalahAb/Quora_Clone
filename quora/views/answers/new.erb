@@ -1,6 +1,6 @@
 
 
-<form  method="POST" action="/questions/<%=@id%>/answers">
+<form  method="POST" action="/questions/<%=@question.id%>/answers">
 
   <input type="hidden" name ="_method" value "PUT">
 
@@ -75,15 +75,6 @@
 
 <% end %>
 </ul>
-
-
-
-
-
-
-
-
-
 
 
 <h2> New Answer</h2>
