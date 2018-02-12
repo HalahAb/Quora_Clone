@@ -29,38 +29,44 @@
 <br/>
 <table>
   <tr>
-
+    <!-- #Add another question -->
     <td>
-      <!-- #Add another question -->
-
       <form  method="GET" action="/questions/new">
         <input type="submit" value="New Question">
       </form> 
     </td>
 
-     <td>
+    
     <!-- View all questions -->
-    <form  method="GET" action="/questions">
-    <input type="submit" value="View all questions">
-    </form> 
+    <td>
+      <form  method="GET" action="/questions">
+        <input type="submit" value="View all questions">
+      </form> 
     </td>
 
-    <td>
-
-
-
-     <td>
     <!-- answer a question -->
-    <form  method="GET" action="/questions/<%=@id%>/answer">
-    <input type="submit" value="Answer">
-    </form> 
+    <td>
+      <form  method="GET" action="/questions/<%=@id%>/answer">
+        <input type="submit" value="Answer">
+      </form> 
     </td>
 
+    <!-- #EDIT -->
     <td>
+      <form  method="GET" action="/questions/<%= @question.id %>/edit">
+        <input type="submit" value="EDIT">
+      </form>
+    </td>
 
-
-
-</tr>
+    
+      <!-- #DELETE -->
+      <td>
+      <form  method="POST" action="/questions/<%= @question.id %>/delete">
+        <input type="hidden" name ="_method" value= "DELETE">
+        <input type="submit" value="DELETE">
+      </form>
+    </td>
+  </tr>
 </table>
 
 

@@ -10,13 +10,16 @@
   <body>
 
   <h1>Quora Clone</h1>
+  <% if @display_sign_in_error %>
+  <p>Please sign in in to post a new question.</p>
+  <% end %>
 
-    <form  method="POST" action="/submit">
+    <form  method="POST" action="/user/sign_in">
       <table style="width:45%">
         <tr>
           <td>Username <input type="text" name="username"></td>
           <td>  Password <input type="text" name="password"> </td>
-          <td><input type="submit" value="Submit"></td>
+          <td><input type="submit" value="Sign in"></td>
         </tr>
       </table>
     </form>
@@ -24,7 +27,7 @@
 
 
   
-    <table>
+  <table>
     <tr>
       <td> <a href="http://localhost:9393/questions"> View all Questions </a> </td>
     </tr>
@@ -32,6 +35,13 @@
     <tr>
       <td><a href="http://localhost:9393/questions/new"> Submit a New Question </a></td>
     </tr>
+
+    <tr> 
+      <td>
+      <strong> Not yet a user? </strong> <a href="http://localhost:9393/user/register"> Register here </a>
+      </td>
+    </tr>
+
   </table>
     
 

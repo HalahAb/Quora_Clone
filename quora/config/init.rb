@@ -22,6 +22,8 @@ require 'active_record'
 
 require 'sinatra'
 
+require "sinatra/cookies"
+
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 set :views, File.join(APP_ROOT, "views")

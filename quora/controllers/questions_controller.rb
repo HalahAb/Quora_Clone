@@ -6,10 +6,17 @@ end
 
 #get a form to create a question
 get '/questions/new' do
-  erb :"questions/new"
+
+  if cookies[:user_id].present?
+     
+     erb :"questions/new"
+  else
+    @display_sign_in_error =  true
+    erb :"home"
+  end
 end
 
-#get a question
+#get a question (Has a delete feature used after a user posts a question he can delete it)
 get '/questions/:id' do
 
   @question = Question.find(params[:id])
@@ -20,14 +27,19 @@ end
 
 #store a question
 post '/submit' do
-	@question = Question.new(description: params[:description], title: params[:title] )
+  if cookies[:user_id].present?
+  	@question = Question.new(description: params[:description], title: params[:title], user_id: cookies[:user_id] )
+    	if @question.save
 
-
-	if @question.save
-		redirect '/questions/'+ @question.id.to_s
-	else
-		"Sorry, there was an error!"
-	end 
+        # redirects to questions with the delete feature
+    		redirect '/questions/'+ @question.id.to_s
+    	else
+    		"Sorry, there was an error!"
+    	end 
+  else
+    @display_sign_in_error =  true
+    erb :"home"
+  end
 end
 
 
@@ -43,53 +55,69 @@ end
 
 #show a form to edit an existing question
 get "/questions/:id/edit" do 
-  @id = params[:id]   
-  @question = Question.find(params[:id])
-  erb :"questions/edit"
+    
+  @question = Question.find_by(id: params[:id], user_id: cookies[:user_id])
+  if @question
+    erb :"questions/edit"
+  else
+    @display_sign_in_error =  true
+    erb :"home"
+  end
+
 end
 
 
 # store an updated question
 post "/questions/:id" do 
-  @question = Question.find(params[:id])
+  @question = Question.find_by(id: params[:id], user_id: cookies[:user_id])
+    if @question
+      @question.title = params[:title]
+      @question.description = params[:description]
 
-  @question.title = params[:title]
-  @question.description = params[:description]
-
-  if @question.save
-    redirect '/questions/'+ @question.id.to_s
-  else
-    "Sorry, there was an error!"
-  end 
-
+      if @question.save
+        redirect '/questions/'+ @question.id.to_s #redirects to questions view with delete button
+      else
+        "Sorry, there was an error!"
+      end 
+    else
+      @display_sign_in_error =  true
+      erb :"home"
+    end
 end
 
 
 get "/questions/:id/delete" do 
-  @id = params[:id]   
-  @question = Question.find(params[:id])
+ 
+  @question = Question.find_by(id: params[:id], user_id: cookies[:user_id])
+  
+  if @question 
+    erb :"questions/delete"
+  else
+    @display_sign_in_error =  true
+    erb :"home"
+  end
 
-  erb :"questions/delete"
 end
 
 
 
 
 delete "/questions/:id/delete" do 
-  @id = params[:id]
   @question = Question.find(params[:id])
   @answers = Answer.where("question_id = ?", params[:id])
 
-      if @question
+  if @question
+    if @question.id == cookies[:user_id]
       @question.destroy
-      @answers.destroy
+      @answers.destroy_all
        erb :"questions/delete"
-    else
+    else 
+      "Sorry, you must be logged in to delete this question!"
+    end 
+  else
     "Sorry, there was an error that question does not exist!"
   end
 
-
- 
 end
 
 

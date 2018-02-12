@@ -1,0 +1,47 @@
+<html>
+
+  <head>
+
+    <title>Quora Clone</title>
+
+  </head>
+
+
+  <body>
+
+    <h1>Quora Clone</h1>
+
+
+      <table style="width:50%">
+        <br/>
+        <br/>
+        <br/>
+        <tr>
+  
+          <form  method="POST" action="/user/register">
+            <td>Enter a username <input type="text" name="username"></td>
+          <!-- <td><input type="submit" value="Submit"></td> -->
+          <!-- </form> -->
+
+          <!-- <form  method="POST" action="/submit"> -->
+            <td>Enter a valid password <input type="text" name="password"> </td>
+            <td>Confirm your password <input type="text" name="password_confirmation"></td>
+
+            <td><br/><input type="submit" value="Submit"></td>
+          </form>
+
+        </tr>
+        <tr>
+          <td colspan="3">
+            <br/>
+            <%= @user.errors.full_messages.first %>
+
+          </td>
+        </tr>
+
+      </table>
+
+
+   </body>
+
+</html>
